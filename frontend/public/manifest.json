@@ -1,7 +1,7 @@
 {
-  "short_name": "Anganwadi",
-  "name": "Smart Anganwadi Monitoring System",
-  "description": "Progressive Web App for Anganwadi Workers and Supervisors to track attendance, nutrition, child growth, and daily activities.",
+  "short_name": "Aanganbadi",
+  "name": "Smart Aanganbadi System",
+  "description": "Progressive Web App for Aanganbadi Workers and Supervisors to track attendance, nutrition, child growth, and daily activities.",
   "icons": [
     {
       "src": "/favicon.svg",

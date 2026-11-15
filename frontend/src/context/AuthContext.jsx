@@ -6,7 +6,7 @@ const AuthContext = createContext();
 // Bilingual dictionary (English & Hindi)
 const translations = {
   en: {
-    appTitle: "Smart Anganwadi",
+    appTitle: "Smart Aanganbadi System",
     appSubtitle: "Child Development & Centre Monitoring Platform",
     navDashboard: "Dashboard",
     navChildren: "Children Registry",
@@ -42,7 +42,7 @@ const translations = {
     todayOverview: "Today's Center Overview"
   },
   hi: {
-    appTitle: "स्मार्ट आंगनवाड़ी",
+    appTitle: "स्मार्ट आंगनबाड़ी प्रणाली",
     appSubtitle: "बाल विकास एवं केंद्र निगरानी प्रणाली",
     navDashboard: "डैशबोर्ड",
     navChildren: "बच्चे (रजिस्टर)",

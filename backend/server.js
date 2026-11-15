@@ -36,7 +36,7 @@ if (MONGODB_URI && !MONGODB_URI.includes('YOUR_MONGODB_URI')) {
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'online',
-    app: 'Smart Anganwadi Monitoring System API',
+    app: 'Smart Aanganbadi System API',
     version: '1.0.0',
     timestamp: new Date().toISOString()
   });
@@ -64,5 +64,5 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Smart Anganwadi Backend running on port ${PORT}`);
+  console.log(`🚀 Smart Aanganbadi System Backend running on port ${PORT}`);
 });
