@@ -63,7 +63,7 @@ export default function Login() {
           <div className="login-logo-circle">
             <span className="text-3xl">🌱</span>
           </div>
-          <h1 className="login-title">Smart Aanganbadi System</h1>
+          <h1 className="login-title">Smart Anganwadi</h1>
           <p className="login-subtitle">
             Digital Child Development & Centre Monitoring Platform (PWA)
           </p>

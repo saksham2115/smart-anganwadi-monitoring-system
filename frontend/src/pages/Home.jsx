@@ -25,7 +25,7 @@ export default function Home() {
             <span className="live-dot"></span>
             <span>Digital India • POSHAN Abhiyaan (ICDS)</span>
           </div>
-          <h1 className="hero-title">Smart Aanganbadi System</h1>
+          <h1 className="hero-title">Smart Anganwadi Monitoring Platform</h1>
           <p className="hero-subtitle">
             A Progressive Web App (PWA) digitizing attendance, nutrition distribution, WHO child growth monitoring, and pre-school education.
           </p>

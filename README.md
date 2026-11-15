@@ -1,16 +1,16 @@
-# Smart Aanganbadi System
+# Smart Anganwadi Monitoring System
 ### Digital Child Development & Centre Monitoring Platform (PWA)
 *Built for Integrated Child Development Services (ICDS) & POSHAN Abhiyaan*
 
 ---
 
 ## 1. Project Introduction
-The **Smart Aanganbadi System** is a mobile-first Progressive Web App (PWA) designed to replace the burdensome manual paper registers maintained by Aanganbadi workers across rural and urban centres in India. 
+The **Smart Anganwadi Monitoring System** is a mobile-first Progressive Web App (PWA) designed to replace the burdensome manual paper registers maintained by Anganwadi workers across rural and urban centres in India. 
 
-Aanganbadi centres serve as the frontline delivery points for early childhood care, nutrition, immunization, and preschool education. Traditionally, workers maintain over 11 bulky physical registers (attendance, supplementary nutrition, growth registers, stock registers), leading to administrative overload, delayed malnutrition reporting, and data discrepancies.
+Anganwadi centres serve as the frontline delivery points for early childhood care, nutrition, immunization, and preschool education. Traditionally, workers maintain over 11 bulky physical registers (attendance, supplementary nutrition, growth registers, stock registers), leading to administrative overload, delayed malnutrition reporting, and data discrepancies.
 
 This digital platform empowers:
-1. **Aanganbadi Workers (AWW)**: Easily mark attendance with 1-tap, record morning snacks and hot cooked meals, log child weight and height, track preschool activities, and work **100% offline** in remote areas without internet access.
+1. **Anganwadi Workers (AWW)**: Easily mark attendance with 1-tap, record morning snacks and hot cooked meals, log child weight and height, track preschool activities, and work **100% offline** in remote areas without internet access.
 2. **Supervisors / CDPOs (Child Development Project Officers)**: Monitor multiple centres simultaneously through an aggregated analytics dashboard, receive immediate alerts for Severe Acute Malnutrition (SAM) and chronic absenteeism, and generate official Monthly Progress Reports (MPR).
 
 ---

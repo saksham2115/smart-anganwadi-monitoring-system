@@ -1,10 +1,10 @@
 # PROJECT REPORT ON
-## SMART AANGANBADI SYSTEM
+## SMART ANGANWADI MONITORING SYSTEM
 ### *A Digital Child Development, Nutrition & Centre Monitoring Progressive Web App (PWA)*
 
 ---
 
-**Project Title:** Smart Aanganbadi System  
+**Project Title:** Smart Anganwadi Monitoring System  
 **Domain:** Web Development / Public Health Informatics / Social Impact Computing  
 **Technology Stack:** React.js, JavaScript (ES6+), PWA (Service Workers & Cache API), Node.js, Express.js, WHO Growth Standards Engine  
 **Target Beneficiaries:** Anganwadi Workers (AWW), Helpers, Supervisors (Mukhya Sevikas), and Child Development Project Officers (CDPO)  
