@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Anganwadi Monitoring System - Project Report</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+      --primary: #047857;
+      --primary-light: #ecfdf5;
+      --secondary: #d97706;
+      --danger: #dc2626;
+      --dark: #0f172a;
+      --gray: #475569;
+      --light-gray: #f8fafc;
+      --border: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 11pt;
+      line-height: 1.7;
+      color: var(--dark);
+      background-color: #f1f5f9;
+      padding: 2rem;
+    }
+
+    .report-paper {
+      background: #ffffff;
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 3.5rem 4rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4, h5 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    h1 { font-size: 24pt; line-height: 1.2; margin-bottom: 0.5rem; text-align: center; color: var(--primary); }
+    h2 { font-size: 16pt; margin-top: 2rem; margin-bottom: 0.75rem; border-bottom: 2px solid var(--primary); padding-bottom: 0.3rem; color: var(--primary); }
+    h3 { font-size: 13pt; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #1e293b; }
+    h4 { font-size: 11pt; margin-top: 1rem; margin-bottom: 0.3rem; }
+
+    p { margin-bottom: 1rem; text-align: justify; }
+
+    /* Cover Page */
+    .cover-page {
+      text-align: center;
+      padding: 4rem 1rem 3rem;
+      border: 3px double var(--primary);
+      margin-bottom: 3rem;
+      page-break-after: always;
+    }
+
+    .cover-emblem { font-size: 48pt; margin-bottom: 1rem; }
+    .cover-title { font-size: 26pt; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; }
+    .cover-subtitle { font-size: 13pt; color: var(--gray); margin-top: 0.5rem; font-style: italic; }
+    .cover-divider { width: 120px; height: 3px; background: var(--secondary); margin: 2rem auto; }
+    .cover-meta { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11pt; margin: 2rem 0; line-height: 1.9; }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9.5pt; }
+    th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+    th { background-color: #f8fafc; font-weight: 700; color: #1e293b; }
+    tr:nth-child(even) { background-color: #fbfcfd; }
+
+    /* Badges & Callouts */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 8pt;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .badge-success { background: #dcfce7; color: #15803d; }
+    .badge-warning { background: #fef3c7; color: #b45309; }
+    .badge-danger { background: #fee2e2; color: #b91c1c; }
+
+    .callout {
+      background: var(--light-gray);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 10pt;
+    }
+
+    .formula-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      padding: 1rem;
+      margin: 1rem 0;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10pt;
+      color: #0f172a;
+    }
+
+    ul, ol { margin-left: 1.75rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; }
+
+    .page-break { page-break-after: always; }
+
+    .btn-print {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 10pt;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+    }
+
+    .btn-print:hover { background: #065f46; }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .report-paper { box-shadow: none; padding: 0; max-width: 100%; }
+      .btn-print { display: none; }
+      @page { margin: 20mm; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="btn-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+  <div class="report-paper">
+
+    <!-- COVER PAGE -->
+    <div class="cover-page">
+      <div class="cover-emblem">🏛️</div>
+      <div class="cover-title">Smart Anganwadi Monitoring System</div>
+      <div class="cover-subtitle">A Digital Child Development, Nutrition & Centre Monitoring Progressive Web App (PWA)</div>
+      
+      <div class="cover-divider"></div>
+
+      <div class="cover-meta">
+        <p><strong>A Major Project Report</strong></p>
+        <p>Submitted in partial fulfillment of the requirements for the award of the degree of</p>
+        <p style="font-size: 13pt; font-weight: 700; color: #047857; margin: 0.5rem 0;">
+          BACHELOR OF TECHNOLOGY / COMPUTER APPLICATIONS
+        </p>
+        <p>in</p>
+        <p><strong>COMPUTER SCIENCE & ENGINEERING / INFORMATION TECHNOLOGY</strong></p>
+      </div>
+
+      <div style="margin-top: 3rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10.5pt; text-align: left; display: flex; justify-content: space-between; padding: 0 2rem;">
+        <div>
+          <p><strong>Submitted by:</strong></p>
+          <p>Student Name: _______________________</p>
+          <p>University Roll No: ___________________</p>
+        </div>
+        <div>
+          <p><strong>Project Supervisor / Guide:</strong></p>
+          <p>Professor / Faculty Guide</p>
+          <p>Department of Computer Science</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 3rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10pt; color: #64748b;">
+        ACADEMIC YEAR 2026 – 2027
+      </div>
+    </div>
+
+    <!-- CERTIFICATE & DECLARATION -->
+    <h2>CERTIFICATE OF ORIGINALITY</h2>
+    <p>This is to certify that the project report entitled <strong>"Smart Anganwadi Monitoring System"</strong> submitted by the candidate in partial fulfillment of the requirements for the award of Bachelor's Degree is a bonafide record of work carried out under my supervision and guidance. The contents of this project have not been submitted to any other university or institute for the award of any degree or diploma.</p>
+    
+    <div style="margin-top: 4rem; display: flex; justify-content: space-between; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10pt;">
+      <div>
+        <p>_____________________________</p>
+        <p><strong>Internal Faculty Guide</strong></p>
+        <p>Department of Computer Science</p>
+      </div>
+      <div>
+        <p>_____________________________</p>
+        <p><strong>Head of Department (HOD)</strong></p>
+        <p>Department of Computer Science</p>
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 1: ABSTRACT -->
+    <h2>1. ABSTRACT</h2>
+    <p>The <strong>Smart Anganwadi Monitoring System</strong> is an offline-first Progressive Web App (PWA) designed to replace the physical, multi-register paper records traditionally maintained by Anganwadi workers under India's flagship <strong>Integrated Child Development Services (ICDS)</strong> and <strong>POSHAN Abhiyaan</strong> schemes.</p>
+    
+    <p>Frontline Anganwadi Workers (AWW) typically record data across more than 11 physical ledgers, consuming significant daily operational time and causing severe delays in identifying malnourished children. Furthermore, rural network conditions frequently disrupt cloud-only applications. This system bridges the gap by implementing an <strong>offline transaction queue</strong> that operates without cellular internet connectivity and automatically synchronizes when network access is restored.</p>
+
+    <p>The application implements the official <strong>World Health Organization (WHO) Child Growth Standards</strong>, dynamically calculating Weight-for-Age (WFA), Height-for-Age (HFA), and Body Mass Index (BMI), rendering interactive WHO growth charts, and triggering automated referral alerts for Severe Acute Malnutrition (SAM). Supervisors and Child Development Project Officers (CDPO) receive multi-centre dashboards that monitor supplementary nutrition compliance and automatically generate official Monthly Progress Reports (MPR).</p>
+
+    <!-- CHAPTER 2: PROBLEM DEFINITION & OBJECTIVES -->
+    <h2>2. PROBLEM STATEMENT & OBJECTIVES</h2>
+    <h3>2.1 Existing Challenges</h3>
+    <ul>
+      <li><strong>Excessive Paperwork:</strong> Frontline workers spend 2 to 3 hours daily writing identical child information across multiple physical registers.</li>
+      <li><strong>Delayed Malnutrition Identification:</strong> Manual paper plotting of growth trajectories fails to catch early signs of Moderate Acute Malnutrition (MAM) and Severe Acute Malnutrition (SAM).</li>
+      <li><strong>Preschool Dropout Blindspots:</strong> Consecutive absences across multiple days remain unaddressed until monthly ledger compilation.</li>
+      <li><strong>Unstable Rural Connectivity:</strong> Standard web applications crash or lose form submissions in rural low-bandwidth zones.</li>
+    </ul>
+
+    <h3>2.2 Project Objectives</h3>
+    <ol>
+      <li>Provide a 1-tap mobile interface for daily attendance with batch "Mark All Present" functionality.</li>
+      <li>Track Supplementary Nutrition Programme (SNP) meals, computing calories and protein in real-time against ICDS 500 kcal norms.</li>
+      <li>Automate WHO Child Growth standard evaluations (-3SD to +2SD) with interactive SVG visual growth curves.</li>
+      <li>Ensure 100% offline functionality through PWA Service Workers and LocalStorage queues.</li>
+      <li>Provide a multi-centre supervisory analytics dashboard with automated Monthly Progress Report (MPR) generation.</li>
+    </ol>
+
+    <!-- CHAPTER 3: SYSTEM ARCHITECTURE -->
+    <h2>3. SYSTEM ARCHITECTURE & TECHNOLOGY STACK</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Technology</th>
+          <th>Functional Responsibility</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Frontend Client</strong></td>
+          <td>React 19, JavaScript (ES6+)</td>
+          <td>Interactive mobile-first touch UI with large buttons and bilingual support</td>
+        </tr>
+        <tr>
+          <td><strong>PWA Layer</strong></td>
+          <td>Service Worker (sw.js), Cache API, Manifest</td>
+          <td>Offline asset caching, standalone home-screen installation</td>
+        </tr>
+        <tr>
+          <td><strong>Offline Sync Engine</strong></td>
+          <td>LocalStorage Transaction Queue</td>
+          <td>Optimistic local mutations with automatic background reconnect sync</td>
+        </tr>
+        <tr>
+          <td><strong>Growth Analytics</strong></td>
+          <td>WHO Growth Standards Engine, SVG Charts</td>
+          <td>Z-Score calculations, percentiles, and vector trajectory plotting</td>
+        </tr>
+        <tr>
+          <td><strong>Backend API</strong></td>
+          <td>Node.js, Express.js 5.x</td>
+          <td>REST endpoints for auth, children, attendance, meals, growth, and alerts</td>
+        </tr>
+        <tr>
+          <td><strong>Data Store</strong></td>
+          <td>MongoDB (Mongoose) + JSON Store</td>
+          <td>Zero-config resilient persistence layer with pre-seeded realistic data</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Offline-First Resilience Flow:</strong> When the browser detects an offline state (<code>navigator.onLine === false</code>), write operations (Attendance, Meals, Growth, Activities) are appended to an offline FIFO queue. The UI updates optimistically, showing an <em>"🟠 Offline (N queued)"</em> status badge. When network connectivity restores, a background worker triggers <code>syncPendingQueue()</code> to synchronize all queued items with the backend server.
+    </div>
+
+    <!-- CHAPTER 4: CORE MODULES & FEATURES -->
+    <h2>4. CORE MODULES & FUNCTIONALITY</h2>
+
+    <h3>4.1 Child Enrolment & Digital Health Card</h3>
+    <p>Manages child profiles including Name, Date of Birth (calculating exact age in months), Gender, Parents' Names, Aadhaar/ID, Category (6m–3y Toddler vs. 3y–6y Preschool), Blood Group, and Immunization status. Each child possesses an individual Digital Health Card tracking their nutritional status over time.</p>
+
+    <h3>4.2 Daily Attendance & Dropout Detection</h3>
+    <p>Features 1-tap toggling: <strong>Present (Green)</strong>, <strong>Absent (Red)</strong>, and <strong>Leave (Amber)</strong>. Includes a batch <strong>"Mark All Present"</strong> shortcut. An automated detection algorithm flags children with 3 consecutive absences to trigger a home visit.</p>
+
+    <h3>4.3 Supplementary Nutrition Programme (SNP)</h3>
+    <p>Tracks three nutrition streams: Morning Snacks (Egg, Fruit, Chana), Hot Cooked Meals (Khichdi, Pulao), and Take-Home Rations (THR) for toddlers and nursing mothers. A real-time meter verifies if meals meet the government standard of <strong>500 kcal and 12–15g protein</strong> per child.</p>
+
+    <h3>4.4 WHO Child Growth Monitoring</h3>
+    <p>Records monthly height (cm) and weight (kg). The system evaluates anthropometric parameters against standard WHO percentiles:</p>
+    
+    <div class="formula-box">
+      BMI = Weight (kg) / [Height (m)]² <br>
+      Z-Score = [Measured Weight - WHO Median(age, gender)] / SD(age, gender)
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Classification</th>
+          <th>WHO Z-Score Cutoff</th>
+          <th>Clinical Protocol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-success">Normal (Green)</span></td>
+          <td>&ge; -2 SD</td>
+          <td>Standard supplementary nutrition and growth monitoring</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-warning">MAM (Yellow)</span></td>
+          <td>-3 SD to -2 SD</td>
+          <td>Dietary counseling, energy-dense foods, weekly weight checks</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-danger">SAM (Red Alert)</span></td>
+          <td>&lt; -3 SD</td>
+          <td>Immediate referral to Nutrition Rehabilitation Centre (NRC)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>4.5 Pre-School Learning & Center Hygiene Check</h3>
+    <p>Logs preschool sessions: Rhymes (Baal Geet), Storytelling, Drawing/Art, and Physical Play. Integrates a daily operational checklist verifying drinking water safety, first-aid readiness, handwashing demonstrations, and toilet sanitation.</p>
+
+    <h3>4.6 Supervisor (CDPO) Hub & MPR Reports</h3>
+    <p>Aggregates data across multiple centres (AW-101 to AW-104), providing comparative attendance bar charts, active SAM alert resolution tickets, and automated generation of the official <strong>Monthly Progress Report (MPR)</strong> with 1-click CSV export.</p>
+
+    <!-- CHAPTER 5: TEST CASES & RESULTS -->
+    <h2>5. TESTING & QUALITY ASSURANCE</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Test Case</th>
+          <th>Description</th>
+          <th>Expected Outcome</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TC-01</td>
+          <td>Worker 1-Click Login</td>
+          <td>Logs in as Smt. Meena Kumari (AW-102)</td>
+          <td><span class="badge badge-success">PASS</span></td>
+        </tr>
+        <tr>
+          <td>TC-02</td>
+          <td>Batch "Mark All Present"</td>
+          <td>Sets all children to present, calculates 100% rate</td>
+          <td><span class="badge badge-success">PASS</span></td>
+        </tr>
+        <tr>
+          <td>TC-03</td>
+          <td>3-Day Absence Flag</td>
+          <td>Displays "Dropout Risk" badge next to child</td>
+          <td><span class="badge badge-success">PASS</span></td>
+        </tr>
+        <tr>
+          <td>TC-04</td>
+          <td>Calorie & Protein Meter</td>
+          <td>Compares input against 500 kcal / 12g threshold</td>
+          <td><span class="badge badge-success">PASS</span></td>
+        </tr>
+        <tr>
+          <td>TC-05</td>
+          <td>SAM Growth Trigger</td>
+          <td>Weight &lt; -3SD generates Red Alert and NRC ticket</td>
+          <td><span class="badge badge-success">PASS</span></td>
+        </tr>
+        <tr>
+          <td>TC-06</td>
+          <td>Offline Queue Storage</td>
+          <td>Saves data locally when disconnected from network</td>
+          <td><span class="badge badge-success">PASS</span></td>
+        </tr>
+        <tr>
+          <td>TC-07</td>
+          <td>Background Auto-Sync</td>
+          <td>Synchronizes queue automatically when online</td>
+          <td><span class="badge badge-success">PASS</span></td>
+        </tr>
+        <tr>
+          <td>TC-08</td>
+          <td>MPR Export to CSV</td>
+          <td>Generates downloadable official MPR CSV file</td>
+          <td><span class="badge badge-success">PASS</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- CHAPTER 6: CONCLUSION -->
+    <h2>6. CONCLUSION & SOCIETAL IMPACT</h2>
+    <p>The <strong>Smart Anganwadi Monitoring System</strong> provides an accessible, mobile-first digital replacement for manual paper registers. By ensuring 100% offline reliability through PWA technology and automating clinical WHO malnutrition detection, the system shortens medical intervention turnaround times from weeks to hours.</p>
+
+    <p>Supervisory personnel gain transparent, real-time oversight over multi-centre compliance, meal delivery, and attendance trends, significantly advancing digital health governance under the national POSHAN Abhiyaan mission.</p>
+
+    <div style="margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1rem; font-size: 9pt; color: #64748b; text-align: center;">
+      Smart Anganwadi Monitoring System &bull; Project Report &bull; Academic Year 2026–2027
+    </div>
+
+  </div>
+
+</body>
+</html>

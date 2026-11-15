@@ -1,34 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
+import Sidebar from './components/Sidebar';
+import WorkerDashboard from './pages/WorkerDashboard';
+import SupervisorDashboard from './pages/SupervisorDashboard';
+import ChildrenManagement from './pages/ChildrenManagement';
+import AttendanceManagement from './pages/AttendanceManagement';
+import MealDistribution from './pages/MealDistribution';
+import GrowthMonitoring from './pages/GrowthMonitoring';
+import ActivityManagement from './pages/ActivityManagement';
+import ReportsPage from './pages/ReportsPage';
 import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import QuizRunner from './pages/QuizRunner';
-import Results from './pages/Results';
 
-const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/login" />;
-};
+// Main App Layout
+function AppLayout() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { user, isSupervisor } = useAuth();
 
-function App() {
+  // If user is not logged in, redirect to login
+  if (!user) {
+    return <Login />;
+  }
+
   return (
-    <Router>
-      <div className="main-content">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-          <Route path="/quiz" element={<PrivateRoute><QuizRunner /></PrivateRoute>} />
-          <Route path="/results" element={<PrivateRoute><Results /></PrivateRoute>} />
-        </Routes>
+    <div className="app-root-layout">
+      <Navbar onToggleSidebar={() => setSidebarOpen(prev => !prev)} />
+      <div className="app-body-container">
+        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <main className="app-main-content">
+          <Routes>
+            <Route path="/" element={isSupervisor ? <SupervisorDashboard /> : <WorkerDashboard />} />
+            <Route path="/supervisor" element={<SupervisorDashboard />} />
+            <Route path="/children" element={<ChildrenManagement />} />
+            <Route path="/attendance" element={<AttendanceManagement />} />
+            <Route path="/meals" element={<MealDistribution />} />
+            <Route path="/growth" element={<GrowthMonitoring />} />
+            <Route path="/activities" element={<ActivityManagement />} />
+            <Route path="/reports" element={<ReportsPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
       </div>
-    </Router>
+    </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <AuthProvider>
+        <AppLayout />
+      </AuthProvider>
+    </Router>
+  );
+}

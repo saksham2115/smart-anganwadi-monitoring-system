@@ -1,0 +1,13 @@
+{
+  "name": "smart-anganwadi-monitoring-system",
+  "version": "1.0.0",
+  "description": "Smart Anganwadi Monitoring System - PWA for Anganwadi Workers and Supervisors",
+  "scripts": {
+    "backend": "npm start --prefix backend",
+    "frontend": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend"
+  },
+  "keywords": ["anganwadi", "pwa", "react", "poshan", "who-growth"],
+  "author": "",
+  "license": "ISC"
+}

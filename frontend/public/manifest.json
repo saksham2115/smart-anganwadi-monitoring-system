@@ -1,0 +1,19 @@
+{
+  "short_name": "Anganwadi",
+  "name": "Smart Anganwadi Monitoring System",
+  "description": "Progressive Web App for Anganwadi Workers and Supervisors to track attendance, nutrition, child growth, and daily activities.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#047857",
+  "theme_color": "#047857",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "/"
+}

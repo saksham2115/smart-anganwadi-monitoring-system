@@ -1,56 +1,85 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BrainCircuit, Target, Zap, TrendingUp } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { 
+  Users, 
+  CalendarCheck, 
+  UtensilsCrossed, 
+  Activity, 
+  Sparkles, 
+  BarChart3, 
+  WifiOff, 
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle2
+} from 'lucide-react';
 
-const Home = () => {
+export default function Home() {
+  const { user, isSupervisor } = useAuth();
+
   return (
-    <div className="container mt-8 animate-fade-in">
-      <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto', padding: '4rem 0' }}>
-        <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem', lineHeight: '1.2' }}>
-          Master Your Exams with <br />
-          <span className="text-gradient">AI-Powered Quizzes</span>
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>
-          Stop searching for mock tests. Let our advanced AI generate personalized, 
-          high-quality questions for SSC, UPSC, JEE, and more instantly.
-        </p>
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-          <Link to="/register" className="btn btn-primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
-            Get Started Free
-          </Link>
-          <Link to="/login" className="btn btn-secondary" style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
-            Login
+    <div className="page-container">
+      <div className="dashboard-hero-card">
+        <div className="hero-content">
+          <div className="hero-badge">
+            <span className="live-dot"></span>
+            <span>Digital India • POSHAN Abhiyaan (ICDS)</span>
+          </div>
+          <h1 className="hero-title">Smart Anganwadi Monitoring Platform</h1>
+          <p className="hero-subtitle">
+            A Progressive Web App (PWA) digitizing attendance, nutrition distribution, WHO child growth monitoring, and pre-school education.
+          </p>
+        </div>
+
+        <div className="hero-actions">
+          <Link to={isSupervisor ? "/supervisor" : "/"} className="btn-primary-gradient">
+            <span>Open {isSupervisor ? 'Supervisor Hub' : 'Worker Console'}</span>
+            <ArrowRight size={18} />
           </Link>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', marginTop: '4rem', paddingBottom: '4rem' }}>
-        <div className="glass-panel text-center">
-          <div style={{ background: 'rgba(99, 102, 241, 0.1)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
-            <BrainCircuit color="var(--primary-color)" size={32} />
+      <div className="metrics-grid mb-6">
+        <div className="metric-card">
+          <div className="metric-header">
+            <span className="metric-title">1. Attendance Tracking</span>
+            <CalendarCheck size={20} className="text-emerald-600" />
           </div>
-          <h3 className="mb-2">AI Generation</h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Smart multiple-choice questions created dynamically based on your selected exam and topic.</p>
+          <p className="text-sm text-slate-600 mt-2">
+            1-tap digital attendance recording with automated 3-day chronic absence drop-out alerts.
+          </p>
         </div>
 
-        <div className="glass-panel text-center">
-          <div style={{ background: 'rgba(16, 185, 129, 0.1)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
-            <Target color="var(--accent-success)" size={32} />
+        <div className="metric-card">
+          <div className="metric-header">
+            <span className="metric-title">2. Nutrition & Meals</span>
+            <UtensilsCrossed size={20} className="text-amber-600" />
           </div>
-          <h3 className="mb-2">Targeted Practice</h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Focus on specific subjects and difficulty levels to improve exactly where you need it.</p>
+          <p className="text-sm text-slate-600 mt-2">
+            Supplementary Nutrition Programme (SNP) tracking for calories, protein, and Take-Home Ration (THR).
+          </p>
         </div>
 
-        <div className="glass-panel text-center">
-          <div style={{ background: 'rgba(236, 72, 153, 0.1)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
-            <Zap color="var(--secondary-color)" size={32} />
+        <div className="metric-card">
+          <div className="metric-header">
+            <span className="metric-title">3. WHO Child Growth</span>
+            <Activity size={20} className="text-blue-600" />
           </div>
-          <h3 className="mb-2">Instant Feedback</h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Get immediate scores, detailed explanations for every answer, and performance analytics.</p>
+          <p className="text-sm text-slate-600 mt-2">
+            WHO Age & Sex-Specific Growth Standards with instant SAM/MAM malnutrition classification & referral.
+          </p>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-header">
+            <span className="metric-title">4. Offline-First PWA</span>
+            <WifiOff size={20} className="text-purple-600" />
+          </div>
+          <p className="text-sm text-slate-600 mt-2">
+            Workers can enter daily data in remote areas without internet; synchronizes automatically when online.
+          </p>
         </div>
       </div>
     </div>
   );
-};
-
-export default Home;
+}

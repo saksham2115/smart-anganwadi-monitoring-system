@@ -1,90 +1,178 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { LogIn } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { authApi } from '../services/api';
+import { 
+  UserCheck, 
+  ShieldAlert, 
+  Lock, 
+  Mail, 
+  Sparkles, 
+  ArrowRight, 
+  Baby, 
+  HeartHandshake,
+  CheckCircle2,
+  Building2
+} from 'lucide-react';
 
-const Login = () => {
+export default function Login() {
+  const { loginAsRole, setUser } = useAuth();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleCustomLogin = async (e) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
+    setError('');
 
     try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      
-      const data = await res.json();
-      
-      if (!res.ok) throw new Error(data.message || 'Login failed');
-
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-      
-      window.location.href = '/dashboard'; // Force refresh to update navbar
+      const res = await authApi.login({ email, password });
+      if (res && res.user) {
+        setUser(res.user);
+        if (res.token) localStorage.setItem('anganwadi_token', res.token);
+        navigate(res.user.role === 'supervisor' ? '/supervisor' : '/');
+      }
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleQuickLogin = async (role) => {
+    setLoading(true);
+    try {
+      await loginAsRole(role);
+      navigate(role === 'supervisor' ? '/supervisor' : '/');
+    } catch (err) {
+      setError('Failed to log in with quick demo account');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 80px)' }}>
-      <div className="glass-panel animate-fade-in" style={{ width: '100%', maxWidth: '400px' }}>
-        <div className="text-center mb-8">
-          <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Welcome Back</h2>
-          <p style={{ color: 'var(--text-muted)' }}>Sign in to continue your preparation</p>
+    <div className="login-page-wrapper">
+      <div className="login-card-container">
+        {/* Brand Banner */}
+        <div className="login-brand-header">
+          <div className="login-logo-circle">
+            <span className="text-3xl">🌱</span>
+          </div>
+          <h1 className="login-title">Smart Anganwadi</h1>
+          <p className="login-subtitle">
+            Digital Child Development & Centre Monitoring Platform (PWA)
+          </p>
+          <div className="poshan-tag">
+            <span>🇮🇳 POSHAN Abhiyaan • ICDS Digital Initiative</span>
+          </div>
         </div>
 
         {error && (
-          <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid var(--accent-error)', color: 'var(--accent-error)', padding: '0.75rem', borderRadius: '8px', marginBottom: '1.5rem', fontSize: '0.875rem' }}>
-            {error}
+          <div className="alert-callout critical mb-4">
+            <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="form-label">Email Address</label>
-            <input 
-              type="email" 
-              className="form-input" 
-              required
-              value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
-              placeholder="you@example.com"
-            />
-          </div>
-          
-          <div className="form-group">
-            <label className="form-label">Password</label>
-            <input 
-              type="password" 
-              className="form-input" 
-              required
-              value={formData.password}
-              onChange={(e) => setFormData({...formData, password: e.target.value})}
-              placeholder="••••••••"
-            />
+        {/* 1-Click Fast Login for Evaluators & Workers */}
+        <div className="demo-login-box">
+          <div className="demo-login-heading">
+            <Sparkles size={16} className="text-amber-500" />
+            <span>Fast 1-Click Demo Login (त्वरित प्रवेश)</span>
           </div>
 
-          <button type="submit" className="btn btn-primary w-full justify-center mt-4" disabled={loading}>
-            {loading ? 'Signing in...' : <><LogIn size={18} /> Sign In</>}
+          <div className="demo-buttons-grid">
+            <button
+              type="button"
+              disabled={loading}
+              onClick={() => handleQuickLogin('worker')}
+              className="demo-role-btn worker"
+            >
+              <div className="role-btn-icon bg-emerald-100 text-emerald-700">
+                <UserCheck size={20} />
+              </div>
+              <div className="role-btn-text">
+                <div className="role-btn-title">Anganwadi Worker</div>
+                <div className="role-btn-sub">Smt. Meena Kumari (AW-102 Rampur)</div>
+              </div>
+              <ArrowRight size={18} className="role-btn-arrow" />
+            </button>
+
+            <button
+              type="button"
+              disabled={loading}
+              onClick={() => handleQuickLogin('supervisor')}
+              className="demo-role-btn supervisor"
+            >
+              <div className="role-btn-icon bg-indigo-100 text-indigo-700">
+                <ShieldAlert size={20} />
+              </div>
+              <div className="role-btn-text">
+                <div className="role-btn-title">Supervisor / CDPO</div>
+                <div className="role-btn-sub">Dr. Ananya Sharma (Multi-Centre Oversight)</div>
+              </div>
+              <ArrowRight size={18} className="role-btn-arrow" />
+            </button>
+          </div>
+        </div>
+
+        <div className="divider-text">
+          <span>OR SIGN IN WITH CREDENTIALS</span>
+        </div>
+
+        {/* Email / Password Form */}
+        <form onSubmit={handleCustomLogin} className="login-form">
+          <div className="form-group mb-4">
+            <label className="form-label">Email Address (ईमेल)</label>
+            <div className="input-with-icon">
+              <Mail size={18} className="input-icon" />
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="worker@anganwadi.gov.in"
+                className="form-input with-left-icon"
+              />
+            </div>
+          </div>
+
+          <div className="form-group mb-6">
+            <label className="form-label">Password (पासवर्ड)</label>
+            <div className="input-with-icon">
+              <Lock size={18} className="input-icon" />
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="form-input with-left-icon"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="btn-primary w-full py-3 text-base"
+          >
+            {loading ? 'Signing In...' : 'Sign In to Portal'}
           </button>
         </form>
 
-        <p className="text-center mt-8" style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-          Don't have an account? <Link to="/register" style={{ fontWeight: 600 }}>Sign up</Link>
-        </p>
+        {/* PWA Offline Highlight */}
+        <div className="pwa-highlight-footer">
+          <div className="pwa-feature-badge">
+            <CheckCircle2 size={14} className="text-emerald-600" />
+            <span>Progressive Web App (PWA): Works fully offline with local sync!</span>
+          </div>
+        </div>
       </div>
     </div>
   );
-};
-
-export default Login;
+}
