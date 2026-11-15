@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const seedData = require('./seedData');
 
-const STORE_FILE = path.join(__dirname, 'store.json');
+const STORE_FILE = process.env.VERCEL ? path.join('/tmp', 'store.json') : path.join(__dirname, 'store.json');
 
 class DataStore {
   constructor() {

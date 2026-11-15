@@ -5,9 +5,24 @@
   "scripts": {
     "backend": "npm start --prefix backend",
     "frontend": "npm run dev --prefix frontend",
-    "build": "npm run build --prefix frontend"
+    "build": "npm run build --prefix frontend",
+    "vercel-build": "npm install --prefix frontend && npm run build --prefix frontend"
   },
-  "keywords": ["anganwadi", "smart-anganwadi-monitoring-system", "pwa", "react", "poshan", "who-growth"],
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.6.0"
+  },
+  "keywords": [
+    "anganwadi",
+    "smart-anganwadi-monitoring-system",
+    "pwa",
+    "react",
+    "poshan",
+    "who-growth"
+  ],
   "author": "",
   "license": "ISC"
 }
